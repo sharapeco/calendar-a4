@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			box-sizing: border-box;
+			margin: 0;
+			padding: 0;
+			font-family: '游教科書体';
+			font-weight: bold;
+			line-height: 1;
+		}
+		body {
+			width: 297mm;
+			height: 205mm;
+			padding: 0 3mm;
+			color: #000;
+			background: #fff;
+		}
+		#root {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+		#header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			padding: 2mm;
+			letter-spacing: -0.05em;
+			border-bottom: solid 0.15mm #888;
+		}
+		.month {
+			font-size: 16mm;
+		}
+		.gatu {
+			font-size: 10mm;
+		}
+		.year {
+			font-size: 10mm;
+		}
+		.nen {
+			font-size: 8.4mm;
+		}
+		.row {
+			display: flex;
+		}
+		.row > * {
+			flex: 1;
+		}
+		.weekdays {
+			padding: 2mm 0;
+			text-align: center;
+			font-size: 7.5mm;
+		}
+		.sun,
+		.holiday {
+			color: #f10;
+		}
+		.sat {
+			color: #05f;
+		}
+		.dates {
+			flex: 1;
+			border-top: solid 0.15mm #888;
+		}
+		.date {
+			padding: 2mm;
+			font-size: 10mm;
+		}
+		.date:not(:first-child) {
+			border-left: solid 0.15mm #888;
+		}
+	</style>
+</head>
+<body>
+	<div id="root"></div>
+	<script src="calendar.js"></script>
+	<script src="holidays.js"></script>
+	<script>
+		((root) => {
+			let month = (() => {
+				const now = new Date()
+				return new Date(now.getFullYear(), now.getMonth(), 1)
+			})()
+			
+			const render = () => {
+				root.innerHTML = ''
+				root.appendChild(renderCalendar(month, holidays))
+			}
+			
+			render()
+			
+			document.addEventListener('keydown', (event) => {
+				switch (event.key) {
+					case 'h':
+					case 'ArrowLeft':
+						month = prevMonth(month)
+						render()
+						break
+					case 'l':
+					case 'ArrowRight':
+						month = nextMonth(month)
+						render()
+						break
+				}
+			})
+		})(document.getElementById('root'))
+	</script>
+</body>
+</html>

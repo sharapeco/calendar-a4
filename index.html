@@ -6,6 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<style>
+		@page {
+			size: A4 landscape;
+			margin: 3mm 0;
+		}
 		* {
 			box-sizing: border-box;
 			margin: 0;
@@ -15,8 +19,8 @@
 			line-height: 1;
 		}
 		body {
-			width: 297mm;
-			height: 205mm;
+			width: 291mm;
+			height: 201mm;
 			padding: 0 3mm;
 			color: #000;
 			background: #fff;
@@ -87,14 +91,14 @@
 				const now = new Date()
 				return new Date(now.getFullYear(), now.getMonth(), 1)
 			})()
-			
+
 			const render = () => {
 				root.innerHTML = ''
 				root.appendChild(renderCalendar(month, holidays))
 			}
-			
+
 			render()
-			
+
 			document.addEventListener('keydown', (event) => {
 				switch (event.key) {
 					case 'h':
